@@ -1,0 +1,43 @@
+####### COMMANDS ######
+
+*********************Creating directory ******************
+
+mkdir dir_name                         # Create directory 
+mkdir -p dir_name/sub_dir_name         # Create directory along with sub directory
+
+
+**************** Copying the file/directory **************
+
+cp source_filename destination_filename           # Copy the source file to  the destination filename along with the path if the destination in 
+cp -R source_directory destination_directory      # In this command "-R" denotes a Recursive copy of the directory along with the subdirectory & files 
+
+
+****************** Rename/Move the file/directory *****************
+
+mv target_file destination_file
+mv 
+
+
+option : 
+-f -> Force overwriting                                             # In destination, a file with the same name exists we can use the option according to the need 
+-n -> No overwriting
+-i -> Interactive mode it will ask the user for confirmation 
+
+
+********************* User management ***********************
+
+they are two users in Linux: Root user & non-root user
+
+Root user: Administrator/ super user: Who has all privilege to perform the operation
+Non-root user: Doesn't have all administrator privilege
+
+
+If the user is created by default primary group also created with the same name
+
+
+commands for user creation:
+
+useradd name                    # user to create a user
+id username                     # to check whether a user is created or not
+
+
