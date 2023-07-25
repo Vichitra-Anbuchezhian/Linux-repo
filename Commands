@@ -4,40 +4,155 @@
 
 mkdir dir_name                         # Create directory 
 mkdir -p dir_name/sub_dir_name         # Create directory along with sub directory
+mkdir -p file1/{f2,f3,f4}              # craete multiple subdirectories inside the new parent dir
 
+******************** Remove the file/directory *************
+
+rmdir -p 
 
 **************** Copying the file/directory **************
 
 cp source_filename destination_filename           # Copy the source file to  the destination filename along with the path if the destination in 
+
+option:
+
 cp -R source_directory destination_directory      # In this command "-R" denotes a Recursive copy of the directory along with the subdirectory & files 
+cp -i                                             # Enters interactive mode ; CLI asks confirmation before overwriting file
+cp -n                                             # Don't overwrite the file
+cp -u                                             # updates the destination file only when source file is different from destination file
+cp -v                                             # verbose; print information message
 
 
 ****************** Rename/Move the file/directory *****************
 
 mv target_file destination_file
-mv 
-
 
 option : 
 -f -> Force overwriting                                             # In destination, a file with the same name exists we can use the option according to the need 
 -n -> No overwriting
 -i -> Interactive mode it will ask the user for confirmation 
+-v -> verbose; print information message
+-u ->updates the destination file only when source file is different from destination file
 
 
 ********************* User management ***********************
 
-they are two users in Linux: Root user & non-root user
-
-Root user: Administrator/ super user: Who has all privilege to perform the operation
-Non-root user: Doesn't have all administrator privilege
-
-
-If the user is created by default primary group also created with the same name
+*they are two users in Linux: Root user & non-root user
+ Root user: Administrator/ super user: Who has all privilege to perform the operation
+ Non-root user: Doesn't have all administrator privilege
 
 
-commands for user creation:
+* If the user is created, by default primary group is also created with the same name. Users can also be part of many secondary groups 
+
+eg: useradd abc
+user & primary group abc created, by using usermod cmd we add the user to another group which will become secondary 
+
+* Each user has its unique ID(UID) starting with 1000 by adding user unique ID assigned 1001,1002,1003,....so on
+* once the User created the home directory also created parallelly
+
+* The three critical files containing user and group information are /etc/passwd, /etc/group & /etc/shadow
+* The su (switch user) and sudo cmd can be used to run as a super user
+
+Sudo -> user which has almost administrator priviledge
+Su -> used to change the user profile
+
+su - username                  # `-` denotes environmental variable without - env variable doesn't load for the particular user
+
+
+* The groupadd and groupdel cmd are used to manage group
+* chage cmd can be used to configure and view password expiration settings for users
+
+
 
 useradd name                    # user to create a user
 id username                     # to check whether a user is created or not
+
+passwd username                 # To set the password for user 
+
+usermod name                    # used to modify properties of user
+option:
+-g -> used to change the primary group
+-G -> used to change the second group
+
+userdel name                    # To delete the user
+userdel -r name                 # To delete the user along with a home directory (/home/username)
+
+group add staff                 # to add the group
+cat /etc/group
+o/p :  staff:x:10:student,abc    # staff: grp ; X -> passwd ; 10 ->    ; student,abc -> users
+
+groupdel staff                   # to delete the group
+
+
+
+************************* Permission Management *************************
+
+Chmod -> to change the access permission of files and directories
+chown -> to change the owner of files and directories
+chgrp -> to change the group ownership of files and directories
+
+r -> read -> 4
+w -> write ->2
+x -> execute -> 1
+
+u -> user
+g -> group
+o -> others
+a -> all
+
+chmod 777 filename -> giving full permission to user, groups & others
+chmod g+ux filename -> give the write and execute permission to group members
+chmod u=rwx,o-wx filename -> give read, write and execute permission to the owner and removes the write and execute ownership from other members
+
+chown username filename -> change the owner of the specified file
+chown username:groupname filename -> changes both the owner and group ownership of the specified file
+chgrp groupname filename -> change the group ownership of the specified file
+
+** Linux provides the default permission to file & directory with the help of "umask" value
+For root umask value: 0022 
+0-> Ignore the first zero
+022 -> We need to take into consideration
+
+For normal users umask value: 0002
+0 -> Ignore the first zero
+002 -> Take into consideration
+
+For file always 666
+               -022
+               -----
+                644          -> 6: user ; 4: grp ; 4:others
+
+For directory always 777  ( for dir we need execute permission to go inside the dire without execute permission, error will occur permission denied)
+                    -022
+                    ------
+                     755      -> 7:user ; 5:grp ; 5: others
+
+
+file type :
+1. Normal file `-`      : Regular file 
+2. Directory `d`        : It is directory not a file
+3. pipeline `p`      
+4. hardlink `l`         : Shortcut (or) link
+5. socket file `s`
+6. character file `c`   : it is text file in /dev
+7. Block file `b`       : All storage device represent block file in /dev 
+
+
+****************************** Service management ********************************************
+
+
+service [name] status        # to check the status of service
+service [name] start         # to start the services
+service [name] stop          # to stop the service
+service [name] restart       # To restart the service
+
+
+*************************** Vi editor ******************************************
+
+
+
+
+
+
 
 
